@@ -1,6 +1,6 @@
 package com.pocs.MarketProject.config;
 
-import com.pocs.MarketProject.domain.dto.UserDTO;
+import com.pocs.MarketProject.domain.dto.UserRequestDTO;
 import com.pocs.MarketProject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,10 +17,10 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        UserDTO userDTO1 = new UserDTO("Caio", "caio@email.com", "9999", "caio");
-        UserDTO userDTO2 = new UserDTO("Ariane", "ariane@email.com", "9999", "ariane");
+        UserRequestDTO userRequestDTO1 = new UserRequestDTO("Caio", "caio@email.com", "9999", "caio");
+        UserRequestDTO userRequestDTO2 = new UserRequestDTO("Ariane", "ariane@email.com", "55555", "ariane");
 
-        userService.create(userDTO1);
-        userService.create(userDTO2);
+        userService.create(userRequestDTO1);
+        userService.create(userRequestDTO2);
     }
 }
