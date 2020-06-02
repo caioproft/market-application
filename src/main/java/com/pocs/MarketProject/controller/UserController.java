@@ -26,4 +26,10 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<UserResponse>> findAll(){
+        List<UserResponse> userResponseList = userService.findAll();
+        return new ResponseEntity<>(userResponseList, HttpStatus.OK);
+    }
+
 }
