@@ -1,13 +1,17 @@
-package com.pocs.MarketProject.domain.dto;
+package com.pocs.MarketProject.domain.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserRequestDTO {
+@NoArgsConstructor
+@Builder
+public class UserResponse {
 
     private String name;
     private String email;
