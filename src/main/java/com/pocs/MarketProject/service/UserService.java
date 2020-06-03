@@ -24,13 +24,12 @@ public class UserService {
     UserMapper userMapper;
 
     public void createUser(UserCreateRequest userCreateRequest){
-        User user = userRepository.findByEmail(userCreateRequest.getEmail());
-        if(user == null){
-            user = userMapper.userCreateRequestToUser(userCreateRequest);
-            userRepository.save(user);
-        }else {
-            throw new UserExistsException("Já existe um usuário cadastrado com esse e-mail.");
+        boolean exists = userRepository.existsByEmail(userCreateRequest.getEmail());
+        if(exists){
+            throw new UserExistsException("E-mail já cadastrado");
         }
+        User user = userMapper.userCreateRequestToUser(userCreateRequest);
+        userRepository.save(user);
     }
 
     public List<UserResponse> findAll() {
