@@ -4,6 +4,7 @@ import com.pocs.MarketProject.domain.model.User;
 import com.pocs.MarketProject.domain.request.UserCreateRequest;
 import com.pocs.MarketProject.domain.response.UserResponse;
 import com.pocs.MarketProject.exceptions.UserExistsException;
+import com.pocs.MarketProject.exceptions.UserNotFound;
 import com.pocs.MarketProject.mapper.UserMapper;
 import com.pocs.MarketProject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,16 @@ public class UserService {
         }
 
         return userResponseList;
+    }
+
+    public UserResponse findById(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFound("Usuário não cadastrado."));
+        UserResponse userResponse = userMapper.userToUserResponse(user);
+        return userResponse;
+    }
+
+    public void delete(Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFound("Usuário não encontrado."));
+        userRepository.delete(user);
     }
 }

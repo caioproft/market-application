@@ -32,4 +32,16 @@ public class UserController {
         return new ResponseEntity<>(userResponseList, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserResponse> findbyId(@PathVariable Long id){
+        UserResponse userResponse = userService.findById(id);
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        userService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
