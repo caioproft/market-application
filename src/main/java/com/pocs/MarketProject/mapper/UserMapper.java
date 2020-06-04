@@ -2,8 +2,8 @@ package com.pocs.MarketProject.mapper;
 
 import com.pocs.MarketProject.domain.model.User;
 import com.pocs.MarketProject.domain.request.UserCreateRequest;
+import com.pocs.MarketProject.domain.request.UserUpdateRequest;
 import com.pocs.MarketProject.domain.response.UserResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -31,4 +31,14 @@ public class UserMapper {
 
         return user;
     }
+
+    public User userUpdateRequestToUser(User user, UserUpdateRequest userUpdateRequest){
+
+        user.setName(userUpdateRequest.getName());
+        user.setEmail(userUpdateRequest.getEmail());
+        user.setPhone(userUpdateRequest.getPhone());
+
+        return user;
+    }
+
 }

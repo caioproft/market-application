@@ -2,6 +2,7 @@ package com.pocs.MarketProject.service;
 
 import com.pocs.MarketProject.domain.model.User;
 import com.pocs.MarketProject.domain.request.UserCreateRequest;
+import com.pocs.MarketProject.domain.request.UserUpdateRequest;
 import com.pocs.MarketProject.domain.response.UserResponse;
 import com.pocs.MarketProject.exceptions.UserExistsException;
 import com.pocs.MarketProject.exceptions.UserNotFound;
@@ -54,4 +55,13 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFound("Usuário não encontrado."));
         userRepository.delete(user);
     }
+
+    public UserResponse update(Long id, UserUpdateRequest userUpdateRequest){
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFound("Usuário não cadastrado."));
+        userMapper.userUpdateRequestToUser(user, userUpdateRequest);
+        UserResponse userResponse = userMapper.userToUserResponse(user);
+
+        return userResponse;
+    }
+
 }

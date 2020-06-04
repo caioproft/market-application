@@ -2,6 +2,7 @@ package com.pocs.MarketProject.controller;
 
 
 import com.pocs.MarketProject.domain.request.UserCreateRequest;
+import com.pocs.MarketProject.domain.request.UserUpdateRequest;
 import com.pocs.MarketProject.domain.response.UserResponse;
 import com.pocs.MarketProject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,12 @@ public class UserController {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping(path = "/{id}" )
+    public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody UserUpdateRequest userUpdateRequest){
+        UserResponse userResponse = userService.update(id, userUpdateRequest);
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
 
 }
