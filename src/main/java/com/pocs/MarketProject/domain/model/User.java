@@ -8,11 +8,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "tb_user")
 public class User {
 
     @Id
@@ -30,6 +33,9 @@ public class User {
 
     @Column(name = "user_password")
     private String password;
+
+    @OneToMany (mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
 
     @Column(name = "created_at")
     @CreationTimestamp
