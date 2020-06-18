@@ -26,10 +26,24 @@ public class Order {
     private LocalDateTime createdAt;
 
     @Column(name = "order_status")
-    private OrderStatus orderStatus;
+    private Integer orderStatus;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
 
+    public Order(Long id, LocalDateTime createdAt, OrderStatus orderStatus, User client){
+        this.id = id;
+        this.createdAt = createdAt;
+        setOrderStatus(orderStatus);
+        this.client = client;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus){
+        this.orderStatus = orderStatus.getCode();
+    }
+
+    public OrderStatus getOrderStatus(){
+        return OrderStatus.valueOf(orderStatus);
+    }
 }

@@ -1,8 +1,10 @@
 package com.pocs.MarketProject.service;
 
+import com.pocs.MarketProject.domain.enuns.OrderStatus;
 import com.pocs.MarketProject.domain.model.Order;
 import com.pocs.MarketProject.domain.request.OrderCreateRequest;
 import com.pocs.MarketProject.domain.response.OrderResponse;
+import com.pocs.MarketProject.exceptions.InvalidOrderStatusException;
 import com.pocs.MarketProject.exceptions.OrderStatusNullException;
 import com.pocs.MarketProject.mapper.OrderMapper;
 import com.pocs.MarketProject.repository.OrderRepository;
@@ -41,6 +43,8 @@ public class OrderService {
         if(orderCreateRequest.getOrderStatus() == null){
             throw new OrderStatusNullException();
         }
+        OrderStatus.valueOf(orderCreateRequest.getOrderStatus().getCode());
+
         userService.findById(orderCreateRequest.getClient().getId());
         Order order = orderMapper.orderCreateRequestoToOrder(orderCreateRequest);
         orderRepository.save(order);
