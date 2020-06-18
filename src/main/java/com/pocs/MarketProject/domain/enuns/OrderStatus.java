@@ -3,17 +3,18 @@ package com.pocs.MarketProject.domain.enuns;
 import com.pocs.MarketProject.exceptions.InvalidOrderStatusException;
 
 public enum OrderStatus {
-    WAITING_PAYMENT(1),
-    PAID(2),
-    SHIPPED(3),
-    DELIVERED(4),
-    CANCELED(5);
+    WAITING_PAYMENT,
+    PAID,
+    SHIPPED,
+    DELIVERED,
+    CANCELED,
+    UNDER_ANALISYS;
 
     private int code;
-
-    private OrderStatus(int code){
-        this.code = code;
-    }
+//
+//    private OrderStatus(int code){
+//        this.code = code;
+//    }
 
     public int getCode(){
         return code;
