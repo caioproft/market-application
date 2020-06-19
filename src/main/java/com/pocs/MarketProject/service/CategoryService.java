@@ -2,6 +2,7 @@ package com.pocs.MarketProject.service;
 
 import com.pocs.MarketProject.domain.model.Category;
 import com.pocs.MarketProject.domain.request.CategoryCreateRequest;
+import com.pocs.MarketProject.domain.request.CategoryUpdateRequest;
 import com.pocs.MarketProject.domain.response.CategoryResponse;
 import com.pocs.MarketProject.exceptions.CategoryExistsException;
 import com.pocs.MarketProject.exceptions.CategoryNotFound;
@@ -48,5 +49,10 @@ public class CategoryService {
         CategoryResponse categoryResponse = categoryMapper.categoryToCategoryResponse(category);
 
         return categoryResponse;
+    }
+
+    public void update(Long id, CategoryUpdateRequest categoryUpdateRequest) {
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFound("Categoria não encontrada"));
+        categoryMapper.categoryUpateRequestToCategory(category, categoryUpdateRequest);
     }
 }

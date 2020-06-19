@@ -2,6 +2,7 @@ package com.pocs.MarketProject.mapper;
 
 import com.pocs.MarketProject.domain.model.Category;
 import com.pocs.MarketProject.domain.request.CategoryCreateRequest;
+import com.pocs.MarketProject.domain.request.CategoryUpdateRequest;
 import com.pocs.MarketProject.domain.response.CategoryResponse;
 import org.springframework.stereotype.Component;
 
@@ -22,5 +23,10 @@ public class CategoryMapper {
         category.setName(categoryCreateRequest.getName());
 
         return category;
+    }
+
+    public void categoryUpateRequestToCategory(Category category, CategoryUpdateRequest categoryUpdateRequest){
+
+         category.setName(categoryUpdateRequest.getName());
     }
 }
