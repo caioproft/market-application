@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
 public class InvalidOrderStatusException extends RuntimeException {
 
-    public InvalidOrderStatusException(String msg){
-        super(msg);
+    public InvalidOrderStatusException(String message){
+        super(message);
     }
 }

@@ -1,5 +1,6 @@
 package com.pocs.MarketProject.domain.enuns;
 
+import com.pocs.MarketProject.exceptions.InvalidDataException;
 import com.pocs.MarketProject.exceptions.InvalidOrderStatusException;
 
 public enum OrderStatus {
@@ -26,6 +27,6 @@ public enum OrderStatus {
                 return value;
             }
         }
-        throw new InvalidOrderStatusException("Código do status do pedido é inválido.");
+        throw new InvalidDataException("Código do status do pedido é inválido.");
     }
 }

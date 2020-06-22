@@ -4,6 +4,7 @@ import com.pocs.MarketProject.domain.model.User;
 import com.pocs.MarketProject.domain.request.UserCreateRequest;
 import com.pocs.MarketProject.domain.request.UserUpdateRequest;
 import com.pocs.MarketProject.domain.response.UserResponse;
+import com.pocs.MarketProject.exceptions.ResourceNotFound;
 import com.pocs.MarketProject.exceptions.UserExistsException;
 import com.pocs.MarketProject.exceptions.UserNotFound;
 import com.pocs.MarketProject.mapper.UserMapper;
@@ -15,7 +16,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Transactional
 @Service
 public class UserService {
 
@@ -25,6 +25,7 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
+    @Transactional
     public void createUser(UserCreateRequest userCreateRequest){
         boolean exists = userRepository.existsByEmail(userCreateRequest.getEmail());
         if(exists){
@@ -34,6 +35,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
     public List<UserResponse> findAll() {
         List<User> userList = userRepository.findAll();
         List<UserResponse> userResponseList = new ArrayList<>();
@@ -45,19 +47,22 @@ public class UserService {
         return userResponseList;
     }
 
+    @Transactional
     public UserResponse findById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFound("Usuário não cadastrado."));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Usuário não cadastrado."));
         UserResponse userResponse = userMapper.userToUserResponse(user);
         return userResponse;
     }
 
+    @Transactional
     public void delete(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFound("Usuário não encontrado."));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Usuário não encontrado."));
         userRepository.delete(user);
     }
 
+    @Transactional
     public UserResponse update(Long id, UserUpdateRequest userUpdateRequest){
-        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFound("Usuário não cadastrado."));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Usuário não cadastrado."));
         userMapper.userUpdateRequestToUser(user, userUpdateRequest);
         UserResponse userResponse = userMapper.userToUserResponse(user);
 

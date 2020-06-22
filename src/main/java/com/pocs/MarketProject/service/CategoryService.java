@@ -6,6 +6,7 @@ import com.pocs.MarketProject.domain.request.CategoryUpdateRequest;
 import com.pocs.MarketProject.domain.response.CategoryResponse;
 import com.pocs.MarketProject.exceptions.CategoryExistsException;
 import com.pocs.MarketProject.exceptions.CategoryNotFound;
+import com.pocs.MarketProject.exceptions.ResourceNotFound;
 import com.pocs.MarketProject.mapper.CategoryMapper;
 import com.pocs.MarketProject.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +46,14 @@ public class CategoryService {
     }
 
     public CategoryResponse findById(Long id) {
-        Category category = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFound("Categoria não encontrada"));
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Categoria não encontrada"));
         CategoryResponse categoryResponse = categoryMapper.categoryToCategoryResponse(category);
 
         return categoryResponse;
     }
 
     public void update(Long id, CategoryUpdateRequest categoryUpdateRequest) {
-        Category category = categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFound("Categoria não encontrada"));
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Categoria não encontrada"));
         categoryMapper.categoryUpateRequestToCategory(category, categoryUpdateRequest);
     }
 }

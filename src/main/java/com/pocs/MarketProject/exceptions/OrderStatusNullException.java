@@ -5,4 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY, reason = "É preciso informar o status do pedido")
 public class OrderStatusNullException extends RuntimeException {
+    public OrderStatusNullException(String message) {
+        super(message);
+    }
 }

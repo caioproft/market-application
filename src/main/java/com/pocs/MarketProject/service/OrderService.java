@@ -4,6 +4,7 @@ import com.pocs.MarketProject.domain.enuns.OrderStatus;
 import com.pocs.MarketProject.domain.model.Order;
 import com.pocs.MarketProject.domain.request.OrderCreateRequest;
 import com.pocs.MarketProject.domain.response.OrderResponse;
+import com.pocs.MarketProject.exceptions.InvalidDataException;
 import com.pocs.MarketProject.exceptions.InvalidOrderStatusException;
 import com.pocs.MarketProject.exceptions.OrderStatusNullException;
 import com.pocs.MarketProject.mapper.OrderMapper;
@@ -41,7 +42,7 @@ public class OrderService {
 
     public void create(OrderCreateRequest orderCreateRequest) {
         if(orderCreateRequest.getOrderStatus() == null){
-            throw new OrderStatusNullException();
+            throw new InvalidDataException("É preciso informar o status do pedido.");
         }
         OrderStatus.valueOf(orderCreateRequest.getOrderStatus().getCode());
 
